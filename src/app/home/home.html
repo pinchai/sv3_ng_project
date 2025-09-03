@@ -1,0 +1,14 @@
+<div class="container">
+  <!--top slider-->
+  <app-top-slider></app-top-slider>
+  <!--product card-->
+  <div class="row">
+    @for (item of products; track item) {
+      <app-product-card
+        class="col-lg-3 col-md-3 col-sm-12 mt-2"
+        [product]="item"
+        (messageEvent)="addToCart($event)"
+      ></app-product-card>
+    }
+  </div>
+</div>
