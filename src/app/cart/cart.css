@@ -1,0 +1,10 @@
+/* Tiny touches without JS */
+.cart-thumb{width:72px;height:72px;object-fit:cover;border-radius:.5rem}
+.qty-input{max-width:90px;text-align:center}
+.price, .subtotal, .total { white-space:nowrap }
+.table thead th{border-top:0}
+.badge-muted{background:#e9ecef;color:#495057}
+.card-totals .list-group-item{display:flex;justify-content:space-between}
+@media (max-width: 575.98px){
+  .text-right-sm{ text-align:right!important; }
+}

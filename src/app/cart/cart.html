@@ -1,1 +1,104 @@
-<p>cart works!</p>
+<main class="container mb-5">
+  <div class="row">
+    <!-- Cart -->
+    <div class="col-lg-8 mb-4">
+      <div class="d-flex align-items-center mb-3">
+        <h4 class="mb-0">Your Cart</h4>
+        <span class="badge badge-muted ml-2">{{ cart_service.getCartCount() }} items</span>
+      </div>
+
+      <div class="card">
+        <div class="table-responsive">
+          <table class="table mb-0 align-middle">
+            <thead class="thead-light">
+            <tr>
+              <th>Product</th>
+              <th class="text-center">Price</th>
+              <th class="text-center">Qty</th>
+              <th class="text-right">Subtotal</th>
+              <th class="text-right"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- Item 1 -->
+              @for (item of cart_service.getCartList(); track item; let  index = $index) {
+                <tr>
+                  <td>
+                    <div class="media align-items-center">
+                      <img
+                        class="cart-thumb mr-3"
+                        src="{{ item.image }}"
+                        alt="{{ item.title }}"
+                        style="object-fit: contain"
+                      >
+                      <div class="media-body">
+                        <a href="#" class="d-block font-weight-600">{{ item.title }}</a>
+                        <small class="text-muted d-block">{{ item.category }}</small>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="text-center price">{{ item.price | currency }}</td>
+                  <td class="text-center">
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                      <button type="button" class="btn btn-danger" (click)="cart_service.removeCartQty(index)">-</button>
+                      <button type="button" class="btn btn-default">{{ item.qty }}</button>
+                      <button type="button" class="btn btn-primary" (click)="cart_service.addCartQty(index)">+</button>
+                    </div>
+
+                  </td>
+                  <td class="text-right subtotal">{{ (item.qty * item.price) | currency }}</td>
+                  <td class="text-right">
+                    <button
+                      class="btn btn-sm btn-outline-danger"
+                      (click)="cart_service.cartRemove(item)"
+                    >Remove
+                    </button>
+                  </td>
+                </tr>
+              }
+
+            </tbody>
+            <tfoot>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Summary -->
+    <div class="col-lg-4">
+      <div class="card card-totals">
+        <div class="card-body">
+          <h5 class="mb-3">Summary</h5>
+          <ul class="list-group list-group-flush mb-3">
+            <li class="list-group-item px-0">
+              <span>Subtotal</span>
+              <span class="total">{{ cart_service.getCartTotal() | currency }}</span>
+            </li>
+            <li class="list-group-item px-0">
+              <span>Shipping</span>
+              <span class="total">$1.00</span>
+            </li>
+            <li class="list-group-item px-0 font-weight-bold">
+              <span>Total</span>
+              <span class="total">{{ cart_service.getCartTotal() + 1 | currency }}</span>
+            </li>
+          </ul>
+
+          <a routerLink="/checkout" class="btn btn-primary btn-block">Proceed to Checkout</a>
+          <a routerLink="/" class="btn btn-success btn-block">Continue To Shopping</a>
+          <hr>
+        </div>
+      </div>
+
+      <!-- Help -->
+      <div class="card mt-3">
+        <div class="card-body">
+          <h6 class="mb-2">Need help?</h6>
+          <p class="mb-2 small text-muted">Call +855 12 345 678 or email supportexample.com</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+

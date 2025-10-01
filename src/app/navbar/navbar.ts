@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {RouterLink} from '@angular/router';
+import {CartService} from "../service/cart-service";
 
 @Component({
   selector: 'app-navbar',
@@ -10,11 +11,11 @@ import {RouterLink} from '@angular/router';
   styleUrl: './navbar.css'
 })
 export class Navbar {
-  ngOnInit() {
-    let cart_list = localStorage.getItem('cart_list') ?? '[]';
-    this.cart_list = JSON.parse(cart_list);
+  constructor(public cart_service: CartService) {
   }
 
-  cart_list: any[] = []
+  ngOnInit() {
+    console.log(this.cart_service.getCartCount() + ' cart count')
+  }
 }
 
